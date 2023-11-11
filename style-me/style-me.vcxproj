@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.c" />
+    <ClCompile Include="main_test.c" />
     <ClCompile Include="token.c" />
     <ClCompile Include="tokenizer.c" />
     <ClCompile Include="tokenizer_output.c" />

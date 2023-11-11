@@ -7,4 +7,5 @@ typedef struct TokenizerOutput
 	int count;
 } TokenizerOutput;
 
-TokenizerOutput* create_tokenizer_output(Token* tokens, int count);
+TokenizerOutput create_tokenizer_output(Token* tokens, int count);
+void free_tokenizer_output(TokenizerOutput output);

@@ -4,7 +4,7 @@
 
 Tokenizer* create_tokenizer(const char* source) 
 {
-	Tokenizer* tokenizer = calloc(1, sizeof(Tokenizer));
+	Tokenizer* tokenizer = malloc(sizeof(Tokenizer));
 	tokenizer->tokens = calloc(strlen(source) + 1, sizeof(Token));
 	tokenizer->source = source;
 	tokenizer->token_count = 0;
@@ -21,30 +21,26 @@ Tokenizer* create_tokenizer(const char* source)
 	return tokenizer;
 }
 
-TokenizerOutput* tokenize(Tokenizer* tokenizer)
+TokenizerOutput tokenize(Tokenizer* tokenizer)
 {
 	add_token(tokenizer, TK_START);
 	int is_source_end = 0;
+	TokenKind token_kind;
 	while (!is_source_end)
 	{
-		switch (peek_tk(tokenizer, 0)) 
+		token_kind = peek_tk(tokenizer, 0);
+		switch (token_kind) 
 		{
 			case TK_END:
 				add_token(tokenizer, TK_END);
 				is_source_end = 1;
 				break;
-			case TK_INVALID: 
-				track_add_tokenkind(tokenizer, TK_INVALID);
-				break;
-			case TK_WHITESPACE: 
+			case TK_WHITESPACE:
 				advance(tokenizer);
-				break; 
-			case TK_IDENTIFIER: 
-				track_add_tokenkind(tokenizer, TK_IDENTIFIER);
-				break; 
-			case TK_NUMBER:
-				track_add_tokenkind(tokenizer, TK_NUMBER);
-				break; 
+				break;
+			case TK_INVALID: case TK_IDENTIFIER: case TK_NUMBER:
+				track_add_token(tokenizer, token_kind);
+				break;
 		}
 	}
 	return create_tokenizer_output(tokenizer->tokens, tokenizer->token_count);
@@ -55,13 +51,19 @@ void advance(Tokenizer* tokenizer)
 	tokenizer->cursor++;
 }
 
+void free_tokenizer(Tokenizer* tokenizer)
+{
+	free(tokenizer);
+	tokenizer = NULL;
+}
+
 void add_token(Tokenizer* tokenizer, TokenKind kind)
 {
 	tokenizer->tokens[tokenizer->token_count] = create_token(kind, tokenizer->source, tokenizer->beg, tokenizer->end);
 	tokenizer->token_count++;
 }
 
-void track_add_tokenkind(Tokenizer* tokenizer, TokenKind kind)
+void track_add_token(Tokenizer* tokenizer, TokenKind kind)
 {
 
 	tokenizer->beg = tokenizer->cursor;
