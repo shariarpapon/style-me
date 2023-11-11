@@ -1,4 +1,8 @@
 #pragma once
+
+///<summary>
+///Enum for different types of token. 
+///</summary>
 typedef enum TokenKind
 {
 	TK_START,

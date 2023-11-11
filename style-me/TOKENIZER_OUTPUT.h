@@ -1,6 +1,9 @@
 #pragma once
 #include "TOKEN.h"
 
+///<summary>
+///Output data of a tokenizing process.
+///</summary>
 typedef struct TokenizerOutput 
 {
 	Token* tokens;

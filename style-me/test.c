@@ -4,6 +4,7 @@
 
 int main()
 {
+	//Test the tokenizer
 	const char* test_source = "void { integer age = 19; }";
 	Tokenizer* tokenizer = create_tokenizer(test_source);
 	TokenizerOutput output = tokenize(tokenizer);

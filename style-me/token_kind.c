@@ -1,6 +1,9 @@
 #include "TOKEN_KIND.h"
 #include <ctype.h>
 
+///<returns>
+/// 1 (true) if the given character is an operator, otherwise returns 0 (false).
+///</returns>
 int is_operator_tk(char c)
 {
 	switch (c)
@@ -12,6 +15,9 @@ int is_operator_tk(char c)
 	}
 };
 
+///<returns>
+///The evaluated TokenKind of the given character.
+///</returns>
 TokenKind eval_tokenkind(char c)
 {
 	if (c == '\0')
@@ -28,6 +34,9 @@ TokenKind eval_tokenkind(char c)
 		return TK_INVALID;
 };
 
+///<returns>
+///A string representation of the given TokenKind.
+///</returns>
 const char* tokenkind_to_str(TokenKind kind)
 {
 	switch (kind)
