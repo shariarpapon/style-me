@@ -27,3 +27,4 @@ void advance(Tokenizer* tokenizer);
 void track_add_token(Tokenizer* tokenizer);
 void track_add_identifier_or_keyword_token(Tokenizer* tokenizer);
 void free_tokenizer(Tokenizer* tokenizer);
+const char* read_source_file(const char* filepath);

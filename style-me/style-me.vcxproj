@@ -138,6 +138,9 @@
     <ClInclude Include="TOKENIZER_OUTPUT.h" />
     <ClInclude Include="TOKEN_KIND.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="testsource.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

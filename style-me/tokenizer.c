@@ -1,7 +1,7 @@
+#define _CRT_SECURE_NO_DEPRECATE
 #include "TOKENIZER.h"
 #include <string.h>
 #include <stdio.h>
-
 
 ///<returns>
 ///A tokenizer pointer initialized with the source string.
@@ -68,6 +68,27 @@ TokenizerOutput tokenize(Tokenizer* tokenizer)
 		exit(EXIT_FAILURE);
 	}
 	return create_tokenizer_output(tokenizer->tokens, tokenizer->token_count);
+}
+
+///<returns>
+///The complete source string scanned from the given filepath.
+///</returns>
+const char* read_source_file(const char* path)
+{
+	FILE* file;
+	file = fopen(path, "r");
+	size_t char_count = 0;
+	while (!feof(file)) 
+	{
+		char_count++;
+		fgetc(file);
+	}
+	fseek(file, 0, SEEK_SET);
+	char* str = calloc(char_count, sizeof(char));
+	fread(str, 1, char_count, file);
+	str[char_count] = '\0';
+	fclose(file);
+	return str;
 }
 
 /// <summary>
@@ -148,6 +169,7 @@ TokenKind peek_tk_next_nospace(Tokenizer* tokenizer)
 	}
 	return tk;
 }
+
 
 ///<summary>
 ///Frees any memory allocated by the tokenizer.

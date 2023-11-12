@@ -36,4 +36,9 @@
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="testsource.txt">
+      <Filter>src</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

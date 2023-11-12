@@ -5,8 +5,8 @@
 #define KEYWORD_begin "begin"
 #define KEYWORD_make "make"
 #define KEYWORD_call "call"
-#define KEYWORD_input "input"
-#define KEYWORD_output "output"
+#define KEYWORD_in "in"
+#define KEYWORD_out "out"
 #define KEYWORD_value "value"
 #define KEYWORD_procedure "procedure"
 #define KEYWORD_end "end"
@@ -50,8 +50,8 @@ inline int is_keyword(const char* value)
 		!strcmp(value, KEYWORD_begin) 
 		|| !strcmp(value, KEYWORD_make) 
 		|| !strcmp(value, KEYWORD_call) 
-		|| !strcmp(value, KEYWORD_input) 
-		|| !strcmp(value, KEYWORD_output) 
+		|| !strcmp(value, KEYWORD_in) 
+		|| !strcmp(value, KEYWORD_out) 
 		|| !strcmp(value, KEYWORD_value) 
 		|| !strcmp(value, KEYWORD_procedure)
 		|| !strcmp(value, KEYWORD_end)

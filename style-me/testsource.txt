@@ -1,0 +1,5 @@
+begin
+make procedure PrintInfo:
+in(age, name): out(info):
+call PrintInfo(20, Bob)
+end

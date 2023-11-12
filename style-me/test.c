@@ -2,10 +2,11 @@
 #include "TOKENIZER.h"
 #include <stdio.h>
 
+
 int main()
 {
-	//Test the tokenizer
-	const char* test_source = "begin\nmake foo\nprocedure input(age, name) output(int) \nend";
+	const char* test_source_file = "testsource.txt";
+	const char* test_source = read_source_file(test_source_file);
 	printf("SOURCE CODE\n----------------\n");
 	printf("%s%s", test_source,"\n-------------------------------------\n\n");
 
