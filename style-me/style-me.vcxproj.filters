@@ -15,9 +15,6 @@
     <ClCompile Include="token.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="token_kind.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="tokenizer.c">
       <Filter>src</Filter>
     </ClCompile>

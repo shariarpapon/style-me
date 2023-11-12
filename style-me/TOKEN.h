@@ -14,3 +14,4 @@ typedef struct Token
 
 Token create_token(TokenKind kind, const char* source, int beg, int end);
 const char* get_token_value(Token token);
+const char* get_token_value_raw(const char* source, int beg, int end);

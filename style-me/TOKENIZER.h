@@ -20,8 +20,10 @@ typedef struct Tokenizer
 Tokenizer* create_tokenizer(const char* source);
 TokenizerOutput tokenize(Tokenizer* tokenizer);
 TokenKind peek_tk(Tokenizer* tokenizer, int offset);
+TokenKind peek_tk_next_nospace(Tokenizer* tokenizer);
+void add_token(Tokenizer* tokniezer);
 char peek_c(Tokenizer* tokenizer, int offset);
 void advance(Tokenizer* tokenizer);
-void add_token(Tokenizer* tokniezer);
 void track_add_token(Tokenizer* tokenizer);
+void track_add_identifier_or_keyword_token(Tokenizer* tokenizer);
 void free_tokenizer(Tokenizer* tokenizer);

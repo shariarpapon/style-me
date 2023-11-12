@@ -131,7 +131,6 @@
     <ClCompile Include="token.c" />
     <ClCompile Include="tokenizer.c" />
     <ClCompile Include="tokenizer_output.c" />
-    <ClCompile Include="token_kind.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TOKEN.h" />
