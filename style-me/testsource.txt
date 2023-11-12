@@ -1,5 +1,7 @@
 begin
-make procedure PrintInfo:
-in(age, name): out(info):
+make container PrintInfo
+in(age, text name) out(text values)
+text info
+pack label info 
 call PrintInfo(20, Bob)
 end

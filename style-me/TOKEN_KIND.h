@@ -7,9 +7,11 @@
 #define KEYWORD_call "call"
 #define KEYWORD_in "in"
 #define KEYWORD_out "out"
-#define KEYWORD_value "value"
-#define KEYWORD_procedure "procedure"
+#define KEYWORD_pack "pack"
+#define KEYWORD_label "label"
+#define KEYWORD_container "container"
 #define KEYWORD_end "end"
+#define KEYWORD_text "text"
 
 ///<summary>
 ///Enum for different types of token. 
@@ -52,9 +54,11 @@ inline int is_keyword(const char* value)
 		|| !strcmp(value, KEYWORD_call) 
 		|| !strcmp(value, KEYWORD_in) 
 		|| !strcmp(value, KEYWORD_out) 
-		|| !strcmp(value, KEYWORD_value) 
-		|| !strcmp(value, KEYWORD_procedure)
+		|| !strcmp(value, KEYWORD_pack) 
+		|| !strcmp(value, KEYWORD_label)
+		|| !strcmp(value, KEYWORD_container)
 		|| !strcmp(value, KEYWORD_end)
+		|| !strcmp(value, KEYWORD_text)
 	) return 1;
 
 	return 0;

@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 #define PRINT_SORUCE 1
-#define PRINT_TOKENIZED_OUTPUT 0
+#define PRINT_TOKENIZED_OUTPUT 1
 
 int main()
 {
