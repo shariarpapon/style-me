@@ -57,14 +57,14 @@ TokenizerOutput tokenize(Tokenizer* tokenizer)
 	const char* beg_tk_val = get_token_value(tokenizer->tokens[0]);
 	if (strcmp(beg_tk_val, KEYWORD_begin) != 0)
 	{
-		perror("Cannot tokenizer: source string does not define `begin`.");
+		perror("Cannot tokenize: source string does not define `begin`.");
 		exit(EXIT_FAILURE);
 	}
 
 	const char* end_tk_val = get_token_value(tokenizer->tokens[tokenizer->token_count - 1]);
 	if (strcmp(end_tk_val, KEYWORD_end) != 0)
 	{
-		perror("Cannot tokenizer: source string does not define `end`.");
+		perror("Cannot tokenize: source string does not define `end`.");
 		exit(EXIT_FAILURE);
 	}
 	return create_tokenizer_output(tokenizer->tokens, tokenizer->token_count);

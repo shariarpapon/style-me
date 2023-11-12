@@ -89,7 +89,7 @@ inline TokenKind eval_tokenkind(char c)
 		return TK_NUMBER;
 	else if (is_operator(c))
 		return TK_OPERATOR;
-	else if (is_arg_delimiter)
+	else if (is_arg_delimiter(c))
 		return TK_ARG_DELIMITER;
 	else
 		return TK_INVALID;

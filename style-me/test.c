@@ -5,8 +5,8 @@
 int main()
 {
 	//Test the tokenizer
+	const char* test_source = "begin\nmake foo\nprocedure input(age, name) output(int) \nend";
 	printf("SOURCE CODE\n----------------\n");
-	const char* test_source = "begin\nmake foo\nprocedure input(a, b) output(int) \nend";
 	printf("%s%s", test_source,"\n-------------------------------------\n\n");
 
 	Tokenizer* tokenizer = create_tokenizer(test_source);
