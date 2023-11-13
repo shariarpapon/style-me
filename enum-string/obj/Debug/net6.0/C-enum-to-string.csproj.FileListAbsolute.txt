@@ -1,0 +1,14 @@
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\bin\Debug\net6.0\C-enum-to-string.exe
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\bin\Debug\net6.0\C-enum-to-string.deps.json
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\bin\Debug\net6.0\C-enum-to-string.runtimeconfig.json
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\bin\Debug\net6.0\C-enum-to-string.dll
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\bin\Debug\net6.0\C-enum-to-string.pdb
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\obj\Debug\net6.0\C-enum-to-string.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\obj\Debug\net6.0\C-enum-to-string.AssemblyInfoInputs.cache
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\obj\Debug\net6.0\C-enum-to-string.AssemblyInfo.cs
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\obj\Debug\net6.0\C-enum-to-string.csproj.CoreCompileInputs.cache
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\obj\Debug\net6.0\C-enum-to-string.dll
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\obj\Debug\net6.0\refint\C-enum-to-string.dll
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\obj\Debug\net6.0\C-enum-to-string.pdb
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\obj\Debug\net6.0\C-enum-to-string.genruntimeconfig.cache
+C:\Users\Shariar\Documents\Projects\style-me\enum-string\obj\Debug\net6.0\ref\C-enum-to-string.dll

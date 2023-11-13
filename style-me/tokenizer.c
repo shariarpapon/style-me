@@ -27,7 +27,7 @@ Tokenizer* create_tokenizer(const char* source)
 ///Tokenizes the source string.
 ///</summary>
 ///<returns>
-///A tokenizer output.
+///A tokenizer output which contains the token pointer and the number of tokens.
 ///</returns>
 TokenizerOutput tokenize(Tokenizer* tokenizer)
 {
@@ -37,35 +37,22 @@ TokenizerOutput tokenize(Tokenizer* tokenizer)
 		tokenizer->kind = peek_tk(tokenizer, 0);
 		switch (tokenizer->kind)
 		{
-			case TK_INVALID: 
-			case TK_NUMBER:
-			case TK_ARG_DELIMITER:
-				track_add_token(tokenizer);
+			case TK_WHITESPACE:
+				advance(tokenizer);
 				break;
-			case TK_IDENTIFIER: 
-				track_add_identifier_or_keyword_token(tokenizer);
+			case TK_INVALID:
+				notrack_add_token(tokenizer);
+				break;
+			case TK_IDENTIFIER:
+				track_add_identifier_token(tokenizer);
+				break;
+			case TK_NUMBER:
+				track_add_token(tokenizer);
 				break;
 			case TK_END:
 				is_source_end = 1;
 				break;
-			case TK_WHITESPACE:
-				advance(tokenizer);
-				break;
 		}
-	}
-	
-	const char* beg_tk_val = get_token_value(tokenizer->tokens[0]);
-	if (strcmp(beg_tk_val, KEYWORD_begin) != 0)
-	{
-		perror("Cannot tokenize: source string does not define `begin`.");
-		exit(EXIT_FAILURE);
-	}
-
-	const char* end_tk_val = get_token_value(tokenizer->tokens[tokenizer->token_count - 1]);
-	if (strcmp(end_tk_val, KEYWORD_end) != 0)
-	{
-		perror("Cannot tokenize: source string does not define `end`.");
-		exit(EXIT_FAILURE);
 	}
 	return create_tokenizer_output(tokenizer->tokens, tokenizer->token_count);
 }
@@ -100,11 +87,20 @@ void advance(Tokenizer* tokenizer)
 }
 
 /// <summary>
-/// Adds the currently scanned token to the token pointer. The cursor index is not advanced and must be called explicitly.
+/// Adds a token with the currently tracked tokenizer data.
 /// </summary>
-void add_token(Tokenizer* tokenizer)
+void add_current_token(Tokenizer* tokenizer)
 {
-	tokenizer->tokens[tokenizer->token_count] = create_token(tokenizer->kind, tokenizer->source, tokenizer->beg, tokenizer->end);
+	Token cur_token = create_token(tokenizer->kind, tokenizer->source, tokenizer->beg, tokenizer->end);
+	add_token(tokenizer, cur_token);
+}
+
+/// <summary>
+/// Adds the given token to the token pointer.
+/// </summary>
+void add_token(Tokenizer* tokenizer, Token token)
+{
+	tokenizer->tokens[tokenizer->token_count] = token;
 	tokenizer->token_count++;
 }
 
@@ -118,23 +114,39 @@ void track_add_token(Tokenizer* tokenizer)
 	while (peek_tk(tokenizer, 0) == tokenizer->kind)
 		advance(tokenizer);
 	tokenizer->end = tokenizer->cursor - 1;
-	add_token(tokenizer);
+	add_current_token(tokenizer);
+}
+
+/// <summary>
+/// Adds a token for the single character and does not track farther for a whole string. The cursor index is advanced after adding the token thus,
+/// advance() does not need to be called explicitly.
+/// </summary>
+void notrack_add_token(Tokenizer* tokenizer)
+{
+	tokenizer->beg = tokenizer->cursor;
+	tokenizer->end = tokenizer->beg;
+	add_current_token(tokenizer);
+	advance(tokenizer);
 }
 
 /// <summary>
 /// Tracks and adds the current token as eitehr a identifier or a keyword if a match is found. 
-/// The cursor index is advanced until a different TokenKind is encountered thus advance() does not need to be called explicitly.
+/// The cursor index is advanced until a different TokenKind is encountered thus, advance() does not need to be called explicitly.
 /// </summary>
-void track_add_identifier_or_keyword_token(Tokenizer* tokenizer) 
+void track_add_identifier_token(Tokenizer* tokenizer) 
 {
 	tokenizer->beg = tokenizer->cursor;
 	while (peek_tk(tokenizer, 0) == tokenizer->kind)
 		advance(tokenizer);
 	tokenizer->end = tokenizer->cursor - 1;
 	char* value = get_token_value_raw(tokenizer->source, tokenizer->beg, tokenizer->end);
-	if (is_keyword((const char*)value))
-		tokenizer->kind = TK_KEYWORD;
-	add_token(tokenizer);
+	if (is_access_mod((const char*)value))
+		tokenizer->kind = TK_ACCESS_MOD;
+	else if (is_scope_mod((const char*)value))
+		tokenizer->kind = TK_SCOPE_MOD;
+	else 
+		tokenizer->kind = TK_IDENTIFIER;
+	add_current_token(tokenizer);
 }
 
 /// <returns>
@@ -176,7 +188,7 @@ TokenKind peek_tk_next_nospace(Tokenizer* tokenizer)
 ///</summary>
 void free_tokenizer(Tokenizer* tokenizer)
 {
-	free(tokenizer);
+	free((void*)tokenizer);
 	tokenizer = NULL;
 }
 

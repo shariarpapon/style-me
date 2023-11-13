@@ -1,6 +1,8 @@
 #pragma once
 #include "TOKEN_KIND.h"
 
+typedef struct Token Token;
+
 ///<summary>
 ///Holds all relevant data for a token.
 ///</summary>

@@ -17,4 +17,4 @@ void free_tokenizer_output(TokenizerOutput output)
 {
 	free((void*)output.tokens);
 	output.tokens = NULL;
-}
+};

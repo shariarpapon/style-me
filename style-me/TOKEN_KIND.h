@@ -2,16 +2,19 @@
 #include <ctype.h>
 #include <string.h>
 
-#define KEYWORD_begin "begin"
-#define KEYWORD_make "make"
-#define KEYWORD_call "call"
-#define KEYWORD_in "in"
-#define KEYWORD_out "out"
-#define KEYWORD_pack "pack"
-#define KEYWORD_label "label"
-#define KEYWORD_container "container"
-#define KEYWORD_end "end"
-#define KEYWORD_text "text"
+//C# access mods
+#define KEYWORD_public "public"
+#define KEYWORD_private "private"
+#define KEYWORD_protected "protected"
+#define KEYWORD_internal "internal"
+
+//C# scope mods
+#define KEYWORD_static "static"
+#define KEYWORD_const "const"
+
+//C# property keywords
+#define KEYWORD_get "get"
+#define KEYWORD_set "set"
 
 ///<summary>
 ///Enum for different types of token. 
@@ -22,47 +25,41 @@ typedef enum TokenKind
 	TK_END,
 	TK_WHITESPACE,
 	TK_IDENTIFIER,
-	TK_KEYWORD,
-	TK_NUMBER,
-	TK_OPERATOR,
-	TK_ARG_DELIMITER
+	TK_ACCESS_MOD,
+	TK_SCOPE_MOD,
+	TK_NUMBER
 } TokenKind;
 
-///<returns>
-/// 1 if the given character is a argument delimiter.
-///</returns>
-inline int is_arg_delimiter(char c)
-{
-	switch (c) 
-	{
-		case ',':
-			return 1;
-		default:
-			return 0;
-	}
-}
-
-///<returns>
-///1 if the identifier is a keyword or 0 if the identifier did not match a keyword.
-///</returns>
-inline int is_keyword(const char* value) 
+/// <summary>
+/// Returns 1 if the given string is a access modifier (eg. public, private, etc.). Otherwise returns 0.
+/// </summary>
+inline int is_access_mod(const char* value) 
 {
 	if
 	(
-		!strcmp(value, KEYWORD_begin) 
-		|| !strcmp(value, KEYWORD_make) 
-		|| !strcmp(value, KEYWORD_call) 
-		|| !strcmp(value, KEYWORD_in) 
-		|| !strcmp(value, KEYWORD_out) 
-		|| !strcmp(value, KEYWORD_pack) 
-		|| !strcmp(value, KEYWORD_label)
-		|| !strcmp(value, KEYWORD_container)
-		|| !strcmp(value, KEYWORD_end)
-		|| !strcmp(value, KEYWORD_text)
+		   !strcmp(value, KEYWORD_public) 
+		|| !strcmp(value, KEYWORD_private) 
+		|| !strcmp(value, KEYWORD_protected) 
+		|| !strcmp(value, KEYWORD_internal)
 	) return 1;
 
 	return 0;
 }
+
+/// <summary>
+/// Returns 1 if the given string is a scope modifier (eg. static, const). Otherwise returns 0.
+/// </summary>
+inline int is_scope_mod(const char* value) 
+{
+	if
+	(
+		   !strcmp(value, KEYWORD_static)
+		|| !strcmp(value, KEYWORD_const)
+	) return 1;
+
+	return 0;
+}
+
 
 ///<returns>
 /// 1 if the given character is an operator, otherwise returns 0.
@@ -91,34 +88,6 @@ inline TokenKind eval_tokenkind(char c)
 		return TK_IDENTIFIER;
 	else if (isdigit(c))
 		return TK_NUMBER;
-	else if (is_operator(c))
-		return TK_OPERATOR;
-	else if (is_arg_delimiter(c))
-		return TK_ARG_DELIMITER;
 	else
 		return TK_INVALID;
 };
-
-///<returns>
-///A string representation of the given TokenKind.
-///</returns>
-inline char* tokenkind_to_str(TokenKind kind)
-{
-	switch (kind)
-	{
-	case TK_END:
-		return "END";
-	case TK_IDENTIFIER:
-		return "IDENTIFIER";
-	case TK_KEYWORD:
-		return "KEYWORD";
-	case TK_NUMBER:
-		return "NUMBER";
-	case TK_OPERATOR:
-		return "OPERATOR";
-	case TK_ARG_DELIMITER:
-		return "ARG_DELIMITER";
-	default:
-		return "INVALID:";
-	}
-}

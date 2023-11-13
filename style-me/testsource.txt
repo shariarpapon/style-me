@@ -1,7 +1,32 @@
-begin
-make container PrintInfo
-in(age, text name) out(text values)
-text info
-pack label info 
-call PrintInfo(20, Bob)
-end
+using UnityEngine;
+
+namespace Wiz.Core
+{
+    public static class CursorHandler
+    {
+        public static bool RestrictCursorModification { get; set; } = false;
+
+        public static void SetCursorDefault()
+        {
+            SetCursorMode(CursorLockMode.None);
+        }
+
+        public static void SetCursorLocked() 
+        {
+            SetCursorMode(CursorLockMode.Locked);
+        }
+
+        public static void SetCursorConfined() 
+        {
+            SetCursorMode(CursorLockMode.Confined);
+        }
+
+        private static void SetCursorMode(CursorLockMode mode) 
+        {
+            if (!RestrictCursorModification)
+            {
+                Cursor.lockState = mode;
+            }
+        }
+    }
+}

@@ -35,6 +35,9 @@
     <ClInclude Include="TOKENIZER_OUTPUT.h">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="TK_ENUM_CONVERSION.h">
+      <Filter>headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="testsource.txt">

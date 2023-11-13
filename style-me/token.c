@@ -7,7 +7,7 @@
 ///</returns>
 Token create_token(TokenKind kind, const char* source, int beg, int end)
 {
-	Token token = { .kind = kind, .source = source, .beg = beg, .end = end };
+	Token token = { .kind = kind, .source = source, .beg = beg, .end = end};
 	return token;
 }
 

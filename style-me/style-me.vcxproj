@@ -133,6 +133,7 @@
     <ClCompile Include="tokenizer_output.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TK_ENUM_CONVERSION.h" />
     <ClInclude Include="TOKEN.h" />
     <ClInclude Include="TOKENIZER.h" />
     <ClInclude Include="TOKENIZER_OUTPUT.h" />
