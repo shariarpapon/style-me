@@ -1,4 +1,5 @@
-#include "TOKEN.h"
+#include "token.h"
+#include "string_utils.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -16,14 +17,7 @@ Token create_token(TokenKind kind, const char* source, int beg, int end)
 ///</returns>
 const char* get_token_value(Token token)
 {
-	if (token.kind == TK_END)
-		return "";
-	int len = token.end - token.beg + 1;
-	char* value = (char*)calloc(len, sizeof(char));
-	for (int i = 0; i < len; i++)
-		value[i] = token.source[token.beg + i];
-	value[len] = '\0';
-	return (const char*)value;
+	return get_token_value_raw(token.source, token.beg, token.end);
 }
 
 ///<returns>
@@ -31,10 +25,7 @@ const char* get_token_value(Token token)
 ///</returns>
 const char* get_token_value_raw(const char* source, int beg, int end)
 {
-	int len = end - beg + 1;
-	char* value = (const char*)calloc(len, sizeof(char));
-	for (int i = 0; i < len; i++)
-		value[i] = source[beg + i];
-	value[len] = '\0';
-	return (const char*)value;
+	if (beg == -1 || end == -1)
+		return "";
+	return get_substr_fromto(source, beg, end);
 }

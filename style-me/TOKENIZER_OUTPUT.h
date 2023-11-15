@@ -1,5 +1,5 @@
 #pragma once
-#include "TOKEN.h"
+#include "token.h"
 
 ///<summary>
 ///Output data of a tokenizing process.

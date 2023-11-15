@@ -1,4 +1,4 @@
-#include "TOKENIZER_OUTPUT.h"
+#include "tokenizer_output.h"
 #include <stdlib.h>
 
 ///<returns>

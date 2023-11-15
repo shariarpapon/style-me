@@ -1,5 +1,5 @@
 #pragma once
-#include "TOKEN_KIND.h"
+#include "token_kind.h"
 
 typedef struct Token Token;
 

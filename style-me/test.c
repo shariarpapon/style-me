@@ -1,13 +1,17 @@
 ﻿#pragma once
-#include "TOKENIZER.h"
-#include "TK_ENUM_CONVERSION.h"
+#include "tokenizer.h"
+#include "tk_enum_conversion.h"
+#include "string_utils.h"
 #include <stdio.h>
 
-#define PRINT_SORUCE 1
-#define PRINT_TOKENIZED_OUTPUT 1
+#define true 1
+#define false 0
+
+#define PRINT_SORUCE false
+#define PRINT_TOKENIZED_OUTPUT true
 
 #define NUM_TK_FILTERS 3
-TokenKind tk_filter[NUM_TK_FILTERS] = { TK_ACCESS_MOD, TK_SCOPE_MOD, TK_IDENTIFIER };
+static TokenKind tk_filter[NUM_TK_FILTERS] = { TK_ACCESS_MOD, TK_SCOPE_MOD, TK_IDENTIFIER };
 
 int main()
 {
@@ -21,7 +25,6 @@ int main()
 
 	if (PRINT_TOKENIZED_OUTPUT)
 	{
-		
 		printf("-------------------\nTOKENIZED OUTPUT\n-------------------\n");
 		Tokenizer* tokenizer = create_tokenizer(test_source);
 		TokenizerOutput output = tokenize(tokenizer);

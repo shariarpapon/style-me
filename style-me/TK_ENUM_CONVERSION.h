@@ -1,5 +1,5 @@
 #pragma once
-#include "TOKEN_KIND.h"
+#include "token_kind.h"
 
 inline const char* tk_to_string(TokenKind kind) 
 {

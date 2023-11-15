@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_DEPRECATE
-#include "TOKENIZER.h"
+#include "tokenizer.h"
 #include <string.h>
 #include <stdio.h>
 

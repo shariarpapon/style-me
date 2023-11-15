@@ -1,5 +1,5 @@
 #pragma once
-#include "TOKENIZER_OUTPUT.h"
+#include "tokenizer_output.h"
 #include <ctype.h>
 #include <stdlib.h>
 
