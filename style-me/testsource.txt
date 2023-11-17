@@ -1,32 +1,89 @@
 using UnityEngine;
+using System.Linq;
+using System.Linq.Expressions;
 
-namespace Wiz.Core
+namespace Brick.Core
 {
-    public static class CursorHandler
+    public class GameManager : MonoBehaviour
     {
-        public static bool RestrictCursorModification { get; set; } = false;
+        public delegate void GameStateEnteredEventHandler(GameState previousState);
+        public static event System.Action StateEntered_Initialize;
+        public static event GameStateEnteredEventHandler StateEntered_Setup;
+        public static event GameStateEnteredEventHandler StateEntered_Countdown;
+        public static event GameStateEnteredEventHandler StateEntered_Choose;
+        public static event GameStateEnteredEventHandler StateEntered_Reveal;
 
-        public static void SetCursorDefault()
+        public static GameState CurrentState { get; private set; }
+        public static bool IsStateLocked { get; set; } = false;
+
+        private void Start()
         {
-            SetCursorMode(CursorLockMode.None);
+            ChangeState(GameState.Initialize, false);
         }
 
-        public static void SetCursorLocked() 
+        public static void ChangeState(GameState newState, bool lockState) 
         {
-            SetCursorMode(CursorLockMode.Locked);
-        }
-
-        public static void SetCursorConfined() 
-        {
-            SetCursorMode(CursorLockMode.Confined);
-        }
-
-        private static void SetCursorMode(CursorLockMode mode) 
-        {
-            if (!RestrictCursorModification)
+            if (IsStateLocked) 
             {
-                Cursor.lockState = mode;
+                Debug.Log($"<color=yellow>Current state is locked. Failed attempt to change state from `{CurrentState}` to `{newState}`.</color>");
+                return;
+            }
+
+            GameState previousState = CurrentState;
+            CurrentState = newState;
+            IsStateLocked = lockState;
+
+            switch (CurrentState) 
+            {
+                case GameState.Initialize:
+                    StateEntered_Initialize?.Invoke();
+                    OnInitialize();
+                    break;
+                case GameState.Setup:
+                    StateEntered_Setup?.Invoke(previousState);
+                    break;
+                case GameState.Countdown:
+                    StateEntered_Countdown?.Invoke(previousState);
+                    break;
+                case GameState.Choose:
+                    StateEntered_Choose?.Invoke(previousState);
+                    break;
+                case GameState.Reveal:
+                    StateEntered_Reveal?.Invoke(previousState);
+                    break;
             }
         }
+
+        private static void OnInitialize() 
+        {
+            #region Init Order 1
+            var inits = FindObjectsOfType<MonoBehaviour>(true).OfType<IInitializer>();
+            foreach (var i in inits) 
+            {
+                i.Init();
+                Debug.Log("<color=#90EE90>" + i.GetType().ToString() + " -- initialized</color>");
+            }
+            #endregion
+
+            #region Init Order 2
+            LayoutManager.Instance.CreateBrickMap();
+            FindObjectOfType<SettingsCanvas>(true).SetDefaultIMS();
+            DataManager.LoadImageSockets();
+            #endregion
+
+            #region Init Order Final
+            ChangeState(GameState.Setup, false);
+            #endregion
+        }
+    }
+
+    [System.Serializable]
+    public enum GameState 
+    {
+        Initialize,
+        Setup,
+        Countdown,
+        Choose,
+        Reveal
     }
 }

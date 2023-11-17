@@ -2,6 +2,7 @@
 #include "tokenizer.h"
 #include "tk_enum_conversion.h"
 #include "string_utils.h"
+#include "styler_formatter.h"
 #include <stdio.h>
 
 #define true 1
@@ -27,19 +28,28 @@ int main()
 	{
 		printf("-------------------\nTOKENIZED OUTPUT\n-------------------\n");
 		Tokenizer* tokenizer = create_tokenizer(test_source);
-		TokenizerOutput output = tokenize(tokenizer);
-		for (int i = 0; i < output.count; ++i)
+		TokenizerOutput tknOutput = tokenize(tokenizer);
+		for (int i = 0; i < tknOutput.count; ++i)
 		{
 			for(int j = 0; j < NUM_TK_FILTERS; j++)
-				if (output.tokens[i].kind == tk_filter[j]) 
+				if (tknOutput.tokens[i].kind == tk_filter[j]) 
 				{
-					printf("%s  %s\n", tk_to_string(output.tokens[i].kind), get_token_value(output.tokens[i]));
+					printf("%s  %s\n", tk_to_string(tknOutput.tokens[i].kind), get_token_value(tknOutput.tokens[i]));
 					break;
 				}
 		}
+		printf("\n\n");
+		StylerBlockOutput blockOutput = generate_styler_blocks(tknOutput);
+		for (int i = 0; i < blockOutput.count; i++) 
+		{
+			StylerBlock b = blockOutput.blocks[i];
+			int _t = (int)b.type;
+			printf("%d  %s\n", _t, get_token_value(b.token));
+		}
 		
+		free(blockOutput.blocks);
 		free_tokenizer(tokenizer);
-		free_tokenizer_output(output);
+		free_tokenizer_output(tknOutput);
 	}
 
 	return 0;

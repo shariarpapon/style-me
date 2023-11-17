@@ -21,6 +21,15 @@
     <ClCompile Include="tokenizer_output.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="string_utils.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="token_kind.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="styler_formatter.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="token.h">
@@ -39,6 +48,9 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="string_utils.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="styler_formatter.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

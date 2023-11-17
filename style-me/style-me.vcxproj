@@ -127,13 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="string_utils.c" />
+    <ClCompile Include="styler_formatter.c" />
     <ClCompile Include="test.c" />
     <ClCompile Include="token.c" />
     <ClCompile Include="tokenizer.c" />
     <ClCompile Include="tokenizer_output.c" />
+    <ClCompile Include="token_kind.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="string_utils.h" />
+    <ClInclude Include="styler_formatter.h" />
     <ClInclude Include="tk_enum_conversion.h" />
     <ClInclude Include="token.h" />
     <ClInclude Include="tokenizer.h" />
